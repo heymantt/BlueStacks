@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+</head>
+<body>
+    
+        <br><br>
+        <div class="dateformat" style="margin-left: 200px">
+        <input style="width: 50px;" type="text" id="day" name="Day">  
+        <input style="width: 50px;" type="text" id="month" name="Month">  
+        <input style="width: 100px;" type="text" id="year" name="Year"> <br><br>
+        </div>
+        <input style="margin-left: 200px" type="submit" id="OnClick" value="Submit">
+        
+        <h3 style="margin-left: 200px">Answer: <div id="Op" style="display: inline-block;"></div></h3> 
+    <script>
+        function isValidDate(date) {
+            var test = date.split('/');
+            var d = new Date(test[2], test[1] - 1, test[0]);
+            return d && (d.getMonth() + 1) == test[1];
+        }
+        console.log($( "input" ).first().val());
+        $( "#OnClick" ).click(function( event ) {
+            $("#Op").empty();
+            console.log($( "#day" ).val());
+            console.log($( "#month" ).val());
+            console.log($( "#year" ).val());
+            var day = JSON.parse($( "#day" ).val());
+            var month = JSON.parse($( "#month" ).val());
+            var year = JSON.parse($( "#year" ).val());
+            if ( (day < 1 || day > 31) || ( month < 1 || month > 12 ) || ( year < 1800 || year > 2100)){
+                
+                alert( 'Incorrect Value' );
+            }
+            else{
+                var next_day = day + 1;
+                var Date = day + "/" + month + "/" + year ; 
+                var new_Date = next_day + "/" + month + "/" + year ; 
+                if(isValidDate(Date) == true){
+                    if(isValidDate(new_Date) == true){
+                        $( "#Op" ).append(new_Date);
+                    }
+                    else{
+                        next_day = 1;
+                        if(month == 12){
+                            month = 1;
+                            year = year + 1;
+                        }
+                        else{
+                            month = month + 1;
+                        }
+                        new_Date = next_day + "/" + month + "/" + year ; 
+                        $( "#Op" ).append(new_Date);
+                    }
+                }
+                else{
+                    alert( 'Incorrect Value' );
+                }
+            }        
+        });
+    </script>
+</body>
+</html>
