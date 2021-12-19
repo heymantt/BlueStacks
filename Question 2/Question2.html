@@ -8,30 +8,30 @@
     
         <br><br>
         <div class="dateformat" style="margin-left: 200px">
-        <input style="width: 50px;" type="text" id="day" name="Day">  
-        <input style="width: 50px;" type="text" id="month" name="Month">  
-        <input style="width: 100px;" type="text" id="year" name="Year"> <br><br>
+        <input style="width: 50px;" type="text" id="day" name="Day">  <!--textbox for DD-->
+        <input style="width: 50px;" type="text" id="month" name="Month">  <!--textbox for MM-->
+        <input style="width: 100px;" type="text" id="year" name="Year"> <br><br> <!--textbox for YYYY-->
         </div>
         <input style="margin-left: 200px" type="submit" id="OnClick" value="Submit">
         
         <h3 style="margin-left: 200px">Answer: <div id="Op" style="display: inline-block;"></div></h3> 
     <script>
+        // Validate that Date Exist or not
         function isValidDate(date) {
             var test = date.split('/');
             var d = new Date(test[2], test[1] - 1, test[0]);
             return d && (d.getMonth() + 1) == test[1];
         }
-        console.log($( "input" ).first().val());
+        
+        //On click event for submit button
         $( "#OnClick" ).click(function( event ) {
-            $("#Op").empty();
-            console.log($( "#day" ).val());
-            console.log($( "#month" ).val());
-            console.log($( "#year" ).val());
-            var day = JSON.parse($( "#day" ).val());
-            var month = JSON.parse($( "#month" ).val());
-            var year = JSON.parse($( "#year" ).val());
-            if ( (day < 1 || day > 31) || ( month < 1 || month > 12 ) || ( year < 1800 || year > 2100)){
-                
+            $("#Op").empty(); //Removes previous Answer 
+            
+            var day = JSON.parse($( "#day" ).val()); //To convert it to integer
+            var month = JSON.parse($( "#month" ).val()); //To convert it to integer
+            var year = JSON.parse($( "#year" ).val()); //To convert it to integer
+            
+            if ( (day < 1 || day > 31) || ( month < 1 || month > 12 ) || ( year < 1800 || year > 2100)){          
                 alert( 'Incorrect Value' );
             }
             else{
